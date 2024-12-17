@@ -36,10 +36,9 @@ kind: Ingress
 metadata:
   name: frontend-ingress
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
-    nginx.ingress.kubernetes.io/add-base-url: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
-  ingressClassName: "nginx"
+  ingressClassName: nginx
   rules:
     - http:
         paths:
@@ -50,8 +49,8 @@ spec:
                 name: srv-frontend
                 port:
                   number: 80
-          - path: /api
-            pathType: Prefix
+          - path: /api(/|$)(.*)
+            pathType: ImplementationSpecific
             backend:
               service:
                 name: srv-api-gateway
@@ -64,8 +63,8 @@ spec:
                 name: srv-logic-api
                 port:
                   number: 5000
-          - path: /admin
-            pathType: Prefix
+          - path: /admin(/|$)(.*)
+            pathType: ImplementationSpecific
             backend:
               service:
                 name: srv-feedback-api

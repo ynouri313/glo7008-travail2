@@ -21,9 +21,9 @@ spec:
             - containerPort: 8080
           env:
             - name: LOGIC_API_URL
-              value: "http://logic-api-service:5000"
+              value: "http://srv-logic-api:5000"
             - name: FEEDBACK_API_URL
-              value: "http://feedback-api-service:5001"
+              value: "http://srv-feedback-api:9000"
           livenessProbe:
             httpGet:
               path: /health
