@@ -11,6 +11,8 @@ spec:
   replicas: 2
   template:
     metadata:
+      annotations:
+        "consul.hashicorp.com/connect-inject": "true"
       labels:
         app: feedback-api
     spec:
@@ -36,6 +38,8 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
+  annotations:
+    "consul.hashicorp.com/service-upstreams": "logic-api:80"
   name: srv-feedback-api
 spec:
   selector:

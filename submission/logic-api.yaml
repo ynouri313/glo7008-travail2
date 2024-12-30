@@ -11,6 +11,8 @@ spec:
   replicas: 2
   template:
     metadata:
+      annotations:
+        "consul.hashicorp.com/connect-inject": "true"
       labels:
         app: logic-api
     spec:
